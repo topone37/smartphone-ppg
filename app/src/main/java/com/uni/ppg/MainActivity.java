@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.graphics.ImageFormat;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +14,12 @@ import com.otaliastudios.cameraview.CameraView;
 import com.otaliastudios.cameraview.controls.Flash;
 import com.uni.ppg.pipeline.PpgFrameProcessor;
 
+import java.lang.ref.WeakReference;
+
 public class MainActivity extends AppCompatActivity {
 
-    private CameraView mCamera;
+    private CameraView camera;
+    private TextView heartRate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initCamera() {
-        mCamera = findViewById(R.id.camera);
-        mCamera.setLifecycleOwner(this);
-        mCamera.setFrameProcessingFormat(ImageFormat.YUV_420_888);
+        camera = findViewById(R.id.camera);
+        camera.setVisibility(View.INVISIBLE);
+        camera.setLifecycleOwner(this);
+        camera.setFrameProcessingFormat(ImageFormat.YUV_420_888);
+        heartRate = findViewById(R.id.heartRate);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -35,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button);
         button.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                mCamera.setFlash(Flash.TORCH);
-                mCamera.addFrameProcessor(new PpgFrameProcessor());
+                camera.setFlash(Flash.TORCH);
+                camera.addFrameProcessor(new PpgFrameProcessor(new WeakReference<>(heartRate)));
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                mCamera.setFlash(Flash.OFF);
-                mCamera.clearFrameProcessors();
+                camera.setFlash(Flash.OFF);
+                camera.clearFrameProcessors();
+                heartRate.setText("");
             }
             return false;
         });
@@ -48,19 +56,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mCamera.open();
+        camera.open();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mCamera.close();
+        camera.close();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mCamera.destroy();
+        camera.destroy();
     }
 
 }

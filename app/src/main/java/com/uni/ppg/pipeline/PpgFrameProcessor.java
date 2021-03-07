@@ -1,5 +1,7 @@
 package com.uni.ppg.pipeline;
 
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
@@ -7,17 +9,22 @@ import com.otaliastudios.cameraview.frame.Frame;
 import com.otaliastudios.cameraview.size.Size;
 import com.uni.ppg.ImageProcessor;
 
+import java.lang.ref.WeakReference;
+import java.util.concurrent.CompletableFuture;
+
 import static com.uni.ppg.PpgApplication.executor;
 
 public class PpgFrameProcessor implements com.otaliastudios.cameraview.frame.FrameProcessor {
 
-    private static final int BATCH_SIZE = 50;
+    private static final int BATCH_SIZE = 100;
 
     private int counter;
     private int[] intensities;
     private long[] timestamps;
+    private WeakReference<TextView> viewWeakReference;
 
-    public PpgFrameProcessor() {
+    public PpgFrameProcessor(WeakReference<TextView> viewWeakReference) {
+        this.viewWeakReference = viewWeakReference;
         resetParameters();
     }
 
@@ -31,13 +38,16 @@ public class PpgFrameProcessor implements com.otaliastudios.cameraview.frame.Fra
         counter++;
 
         if (counter == BATCH_SIZE) {
-            startPipelineThread();
+            calculateHeartRate();
             resetParameters();
         }
     }
 
-    private void startPipelineThread() {
-        executor().execute(new HeartRateThread(intensities, timestamps));
+    private void calculateHeartRate() {
+        CompletableFuture.supplyAsync(new HeartRateSupplier(intensities, timestamps), executor()).thenAccept(s -> {
+            TextView textView = viewWeakReference.get();
+            textView.post(() -> textView.setText(s));
+        });
     }
 
     private void resetParameters() {
