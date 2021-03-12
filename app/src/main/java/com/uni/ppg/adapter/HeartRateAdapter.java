@@ -12,25 +12,24 @@ public class HeartRateAdapter implements HeartRate {
 
     private final int[] zeros;
     private final long[] time;
+    private final int numberOfBeats;
 
     public HeartRateAdapter(int[] zeros, long[] time) {
         this.zeros = zeros;
         this.time = time;
+        this.numberOfBeats = zeros.length - 1;
     }
 
     public String convertToHeartRate() {
-        long[] timesInABatch = new long[zeros.length - 1];
-        for (int i = 0; i < zeros.length - 1; i++) {
-            int firstIndex = zeros[i];
-            int lastIndex = zeros[i + 1];
-            long eta = time[lastIndex] - time[firstIndex];
-            timesInABatch[i] = eta;
+        long[] beatsInABatch = new long[numberOfBeats];
+        for (int i = 0; i < numberOfBeats; i++) {
+            beatsInABatch[i] = time[zeros[i + 1]] - time[zeros[i]];
         }
-        double averageHeartRate = LongStream.of(timesInABatch).average().orElse(0d);
+        double averageHeartRate = LongStream.of(beatsInABatch).average().orElse(0d);
         return uiRepresentation(averageHeartRate);
     }
 
     private String uiRepresentation(double averageHeartRate) {
-        return String.format(Locale.ENGLISH, "%.0f BPM", averageHeartRate);
+        return String.format(Locale.ENGLISH, "%.0f", averageHeartRate);
     }
 }
