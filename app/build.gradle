@@ -32,6 +32,7 @@ dependencies {
     implementation 'com.elvishew:xlog:1.8.0'
     api 'com.otaliastudios:cameraview:2.7.0'
 
+    testImplementation("org.assertj:assertj-core:3.16.1")
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

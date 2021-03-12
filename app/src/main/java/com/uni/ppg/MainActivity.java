@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.otaliastudios.cameraview.CameraView;
 import com.otaliastudios.cameraview.controls.Flash;
-import com.uni.ppg.pipeline.PpgFrameProcessor;
+import com.uni.ppg.image.PpgFrameProcessor;
 
 import java.lang.ref.WeakReference;
 

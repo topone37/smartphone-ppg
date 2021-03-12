@@ -1,6 +1,6 @@
-package com.uni.ppg;
+package com.uni.ppg.image;
 
-public class ImageProcessor {
+public class PixelProcessor {
 
     public static int yuvToRedSum(byte[] yuv, int width, int height) {
         int frameSize = width * height;

@@ -1,7 +1,8 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/primaryPink</item>
-        <item name="colorPrimaryDark">@color/primaryPink</item>
+        <item name="colorPrimary">@color/primaryGreen</item>
+        <item name="colorPrimaryDark">@color/primaryBlue</item>
     </style>
 
     <style name="Button" parent="Widget.AppCompat.Button">

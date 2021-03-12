@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryPink">#F13327</color>
-    <color name="lightGray">#f4f5f7</color>
+    <color name="primaryGreen">#04C4A6</color>
+    <color name="primaryBlue">#244F94</color>
 </resources>

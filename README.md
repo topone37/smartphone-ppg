@@ -21,6 +21,4 @@ This way the light reflected from the finger is collected by the camera. HR is c
 > Note: try to stay still for the best results while holding the button (the device will notify you otherwise)
 
 ## Credits
-The project is built on the frame processing capabilities of [CameraView](cv)
-
-[cv]: <https://github.com/natario1/CameraView>
+The project is built on the frame processing capabilities of [CameraView](https://github.com/natario1/CameraView)
