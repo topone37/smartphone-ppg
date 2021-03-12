@@ -7,18 +7,16 @@ public abstract class SignalProcessorChain {
     public SignalProcessorChain linkWith(SignalProcessorChain nextProcessor) {
         if (this.next == null) {
             this.next = nextProcessor;
-        } else {
-            this.next.next = nextProcessor;
         }
         return nextProcessor;
     }
 
-    public abstract int[] process(int[] intensities);
-
-    protected int[] processNext(int[] intensities) {
+    protected int[] processNext(int[] abundance) {
         if (next == null) {
-            return intensities;
+            return abundance;
         }
-        return next.process(intensities);
+        return next.process(abundance);
     }
+
+    public abstract int[] process(int[] intensities);
 }

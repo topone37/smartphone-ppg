@@ -1,17 +1,24 @@
 package com.uni.ppg.signalprocessing;
 
-import java.util.Arrays;
+import com.elvishew.xlog.XLog;
+
 import java.util.stream.IntStream;
 
+/**
+ * This signal processing step takes the signal after calculating the derivative,
+ * and identifies the indexes where the derivative curve has a value of zero.
+ * Since the it is a series of discrete data, everything under a DELTA value
+ * is identified as zero.
+ * The DELTA is empirical, the optimal value varies.
+ */
 public class MaximaCalculator extends SignalProcessorChain {
 
     private static final int DELTA = 1000;
 
     @Override
     public int[] process(int[] intensities) {
-        System.out.println("In maxima calculator");
+        XLog.d("Running maxima determination");
         int[] zeros = findZeros(intensities);
-        System.out.println(Arrays.toString(zeros));
         return processNext(zeros);
     }
 
