@@ -11,10 +11,11 @@ import com.otaliastudios.cameraview.size.Size;
 import com.uni.ppg.adapter.HeartRate;
 import com.uni.ppg.adapter.HeartRateAdapter;
 import com.uni.ppg.signalprocessing.Differentiator;
-import com.uni.ppg.signalprocessing.LowPassFilter;
 import com.uni.ppg.signalprocessing.MaximaCalculator;
 import com.uni.ppg.signalprocessing.ResultValidator;
 import com.uni.ppg.signalprocessing.SignalProcessorChain;
+import com.uni.ppg.signalprocessing.filter.BoxFilter;
+import com.uni.ppg.signalprocessing.filter.GaussianBlur;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CompletableFuture;
@@ -66,8 +67,9 @@ public class PpgFrameProcessor implements FrameProcessor {
     }
 
     private void calculateHeartRate() {
+        long startTime = time[0];
         int[] y = IntStream.of(abundance).toArray();
-        long[] x = LongStream.of(time).toArray();
+        long[] x = LongStream.of(time).map(t -> t - startTime).toArray();
 
         CompletableFuture.supplyAsync(() -> processSignal(y), executor())
                 .thenApply(signal -> toHeartRate(signal, x))
@@ -75,8 +77,11 @@ public class PpgFrameProcessor implements FrameProcessor {
     }
 
     private int[] processSignal(int[] unprocessedSignal) {
-        SignalProcessorChain chain = new LowPassFilter();
-        chain.linkWith(new Differentiator()).linkWith(new MaximaCalculator()).linkWith(new ResultValidator());
+        SignalProcessorChain chain = new BoxFilter();
+        chain.linkWith(new GaussianBlur())
+                .linkWith(new Differentiator())
+                .linkWith(new MaximaCalculator())
+                .linkWith(new ResultValidator());
         return chain.process(unprocessedSignal);
     }
 

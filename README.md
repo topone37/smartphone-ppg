@@ -5,7 +5,7 @@
 - A photoplethysmograph uses light to detect blood volume changes in the microvascular bed of tissue. 
 - This noninvasive technology can be utilized to measure heart rate, and a number of other physiological parameters. 
 - Traditionally the measurement is carried out with a pulse oximeter
-- A pulse oximeter is a small wearable device (clipped to a for example a finger) which collects and analyzes the reflected or transmitted waves after casting ight on the bodypart.
+- A pulse oximeter is a small wearable device (clipped to a for example a finger) which collects and analyzes the reflected or transmitted waves after casting light on the bodypart.
 
 ## Heart rate (HR) monitoring with a smartphone?
 
@@ -21,4 +21,4 @@ This way the light reflected from the finger is collected by the camera. HR is c
 > Note: try to stay still for the best results while holding the button (the device will notify you otherwise)
 
 ## Credits
-The project is built on the frame processing capabilities of [CameraView](https://github.com/natario1/CameraView)
+The project is built on the frame processing capabilities of [CameraView](https://github.com/natario1/CameraView) (a wrapper library for the android Camera 1 and 2 API)

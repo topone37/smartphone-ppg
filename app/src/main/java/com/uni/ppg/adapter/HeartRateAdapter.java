@@ -25,8 +25,12 @@ public class HeartRateAdapter implements HeartRate {
         for (int i = 0; i < numberOfBeats; i++) {
             beatsInABatch[i] = time[zeros[i + 1]] - time[zeros[i]];
         }
-        double averageHeartRate = LongStream.of(beatsInABatch).average().orElse(0d);
-        return uiRepresentation(averageHeartRate);
+        return uiRepresentation(convertToBeatsPerMinute(beatsInABatch));
+    }
+
+    private double convertToBeatsPerMinute(long[] beatsInABatch) {
+        double averageHeartRateInMillis = LongStream.of(beatsInABatch).average().orElse(0d);
+        return 60000d / averageHeartRateInMillis;
     }
 
     private String uiRepresentation(double averageHeartRate) {

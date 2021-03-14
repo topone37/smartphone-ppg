@@ -2,4 +2,5 @@
 <resources>
     <color name="primaryGreen">#04C4A6</color>
     <color name="primaryBlue">#244F94</color>
+    <color name="transparent">#00000000</color>
 </resources>

@@ -5,7 +5,7 @@ import android.graphics.ImageFormat;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void initButton() {
-        Button button = findViewById(R.id.button);
+        ImageButton button = findViewById(R.id.fingerprintButton);
         button.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 camera.setFlash(Flash.TORCH);

@@ -18,5 +18,5 @@ public abstract class SignalProcessorChain {
         return next.process(abundance);
     }
 
-    public abstract int[] process(int[] intensities);
+    public abstract int[] process(int[] abundance);
 }

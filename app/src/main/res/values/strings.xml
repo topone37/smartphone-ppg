@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PPG</string>
     <string name="buttonText">HR</string>
+    <string name="fingerprintButton">pushButtonForMeasurement</string>
 </resources>

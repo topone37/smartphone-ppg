@@ -1,6 +1,7 @@
-package com.uni.ppg.signalprocessing;
+package com.uni.ppg.signalprocessing.filter;
 
 import com.elvishew.xlog.XLog;
+import com.uni.ppg.signalprocessing.SignalProcessorChain;
 
 /**
  * This signal processing step runs a simple low pass filter on the
