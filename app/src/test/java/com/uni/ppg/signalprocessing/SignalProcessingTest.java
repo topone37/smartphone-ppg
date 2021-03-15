@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FilterTest {
+public class SignalProcessingTest {
 
     private int[] rawSignal = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
@@ -57,4 +57,15 @@ public class FilterTest {
         assertThat(processed).hasSize(4);
     }
 
+    @Test
+    public void canApplyRollingAverageSubtraction() {
+        // given
+        SignalProcessorChain chain = new RollingAverage(3);
+
+        // when
+        int[] processed = chain.process(rawSignal);
+
+        // then
+        assertThat(processed).hasSize(8).containsOnly(1);
+    }
 }

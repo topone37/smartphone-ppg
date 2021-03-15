@@ -11,12 +11,12 @@ public abstract class SignalProcessorChain {
         return nextProcessor;
     }
 
-    protected int[] processNext(int[] abundance) {
+    protected int[] processNext(int[] signal) {
         if (next == null) {
-            return abundance;
+            return signal;
         }
-        return next.process(abundance);
+        return next.process(signal);
     }
 
-    public abstract int[] process(int[] abundance);
+    public abstract int[] process(int[] signal);
 }

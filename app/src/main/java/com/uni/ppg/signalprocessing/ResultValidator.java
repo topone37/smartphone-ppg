@@ -5,8 +5,8 @@ import com.elvishew.xlog.XLog;
 public class ResultValidator extends SignalProcessorChain {
 
     @Override
-    public int[] process(int[] intensities) {
-        XLog.d("Validating results. Number of maxima found: %d", intensities.length);
-        return processNext(intensities);
+    public int[] process(int[] signal) {
+        XLog.d("Validating results. Number of maxima found: %d", signal.length);
+        return processNext(signal);
     }
 }

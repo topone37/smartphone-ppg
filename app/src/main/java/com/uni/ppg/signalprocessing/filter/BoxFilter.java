@@ -26,18 +26,18 @@ public class BoxFilter extends SignalProcessorChain {
     }
 
     @Override
-    public int[] process(int[] abundance) {
+    public int[] process(int[] signal) {
         XLog.d("Applying box filter with window size: %d", windowSize);
-        int[] filtered = filter(abundance);
+        int[] filtered = filter(signal);
         return processNext(filtered);
     }
 
-    private int[] filter(int[] abundance) {
-        int[] filtered = new int[abundance.length - 2 * padding];
+    private int[] filter(int[] signal) {
+        int[] filtered = new int[signal.length - 2 * padding];
         for (int i = padding; i <= filtered.length; i++) {
             int sum = 0;
             for (int j = 0; j < windowSize; j++) {
-                sum += abundance[i - padding + j];
+                sum += signal[i - padding + j];
             }
             filtered[i - padding] = sum / windowSize;
         }

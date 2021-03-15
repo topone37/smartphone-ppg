@@ -12,9 +12,9 @@ import java.util.stream.IntStream;
 public class MaximaCalculator extends SignalProcessorChain {
 
     @Override
-    public int[] process(int[] abundance) {
+    public int[] process(int[] signal) {
         XLog.d("Running maxima determination");
-        int[] maxima = findMaxima(abundance);
+        int[] maxima = findMaxima(signal);
         return processNext(maxima);
     }
 

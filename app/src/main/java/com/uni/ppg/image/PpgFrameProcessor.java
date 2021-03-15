@@ -35,7 +35,7 @@ public class PpgFrameProcessor implements FrameProcessor {
     /**
      * Y axis: the amount of color Red
      */
-    private int[] abundance;
+    private int[] signal;
 
     /**
      * X axis: current time in milliseconds when a frame is captured
@@ -57,7 +57,7 @@ public class PpgFrameProcessor implements FrameProcessor {
     public void process(@NonNull Frame frame) {
         Size size = frame.getSize();
         int redSum = PixelProcessor.yuvToRedSum(frame.getData(), size.getWidth(), size.getHeight());
-        abundance[frameCounter] = redSum;
+        signal[frameCounter] = redSum;
         time[frameCounter] = frame.getTime();
 
         if (++frameCounter == BATCH_SIZE) {
@@ -68,7 +68,7 @@ public class PpgFrameProcessor implements FrameProcessor {
 
     private void calculateHeartRate() {
         long startTime = time[0];
-        int[] y = IntStream.of(abundance).toArray();
+        int[] y = IntStream.of(signal).toArray();
         long[] x = LongStream.of(time).map(t -> t - startTime).toArray();
 
         CompletableFuture.supplyAsync(() -> processSignal(y), executor())
@@ -97,7 +97,7 @@ public class PpgFrameProcessor implements FrameProcessor {
 
     private void resetParameters() {
         frameCounter = 0;
-        abundance = new int[BATCH_SIZE];
+        signal = new int[BATCH_SIZE];
         time = new long[BATCH_SIZE];
     }
 }

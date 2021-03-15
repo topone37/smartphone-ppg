@@ -13,15 +13,15 @@ public class LowPassFilter extends SignalProcessorChain {
     private static final float ALPHA = 0.4557F;
 
     @Override
-    public int[] process(int[] abundance) {
+    public int[] process(int[] signal) {
         XLog.d("Running low pass filter");
-        return processNext(filter(abundance));
+        return processNext(filter(signal));
     }
 
-    private int[] filter(int[] abundance) {
-        int[] filtered = new int[abundance.length - 1];
-        for (int i = 1; i < abundance.length; i++) {
-            float current = ALPHA * (float) i + (1F - ALPHA) * abundance[i - 1];
+    private int[] filter(int[] signal) {
+        int[] filtered = new int[signal.length - 1];
+        for (int i = 1; i < signal.length; i++) {
+            float current = ALPHA * (float) i + (1F - ALPHA) * signal[i - 1];
             filtered[i - 1] = (int) current;
         }
         return filtered;

@@ -13,18 +13,18 @@ public class GaussianBlur extends SignalProcessorChain {
     }
 
     @Override
-    public int[] process(int[] abundance) {
+    public int[] process(int[] signal) {
         XLog.d("Applying Gaussian blur");
-        int[] filtered = filter(abundance);
+        int[] filtered = filter(signal);
         return processNext(filtered);
     }
 
-    private int[] filter(int[] abundance) {
-        int[] filtered = new int[abundance.length - 2 * padding];
+    private int[] filter(int[] signal) {
+        int[] filtered = new int[signal.length - 2 * padding];
         for (int i = padding; i < filtered.length + padding; i++) {
             float value = 0;
             for (int j = 0; j < 7; j++) {
-                value += (float) abundance[i - padding + j] * coefficients[j];
+                value += (float) signal[i - padding + j] * coefficients[j];
             }
             filtered[i - padding] = (int) value;
         }

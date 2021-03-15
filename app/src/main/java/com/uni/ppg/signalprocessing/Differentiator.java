@@ -9,16 +9,16 @@ import com.elvishew.xlog.XLog;
 public class Differentiator extends SignalProcessorChain {
 
     @Override
-    public int[] process(int[] abundance) {
+    public int[] process(int[] signal) {
         XLog.d("Running differentiation");
-        int[] derivative = centeredDifference(abundance);
+        int[] derivative = centeredDifference(signal);
         return processNext(derivative);
     }
 
-    private int[] centeredDifference(int[] abundance) {
-        int[] derivative = new int[abundance.length - 2];
-        for (int t = 0; t < abundance.length - 2; t++) {
-            derivative[t] = (abundance[t + 2] - abundance[t]) / 2;
+    private int[] centeredDifference(int[] signal) {
+        int[] derivative = new int[signal.length - 2];
+        for (int t = 0; t < signal.length - 2; t++) {
+            derivative[t] = (signal[t + 2] - signal[t]) / 2;
         }
         return derivative;
     }
