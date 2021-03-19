@@ -20,6 +20,14 @@ This way the light reflected from the finger is collected by the camera. HR is c
 
 > Note: try to stay still for the best results while holding the button (the device will notify you otherwise)
 
+## How does it work?
+The light reflected from the fingertip is collected. The total intensity of the red component is calculated for each frame. 
+(Infrared can penetrate the tissues, but red is the closest thing we have using the flashlight). The values go through a number of
+signal processing steps. The heart rate is calculated from the distances of the peaks, and the UI is updated with the fresh HR value.
+
+The signal looks something like this, before applying filters for smoothing:  
+![raw_signal](readme_images/raw_signal.jpg)
+
 ## Credits
 The project is built on the frame processing capabilities of [CameraView](https://github.com/natario1/CameraView) (a wrapper library for the android Camera 1 and 2 API).
 Low Pass Filtering is achieved with the [iirj library](https://github.com/berndporr/iirj) 
