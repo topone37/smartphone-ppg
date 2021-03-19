@@ -36,7 +36,7 @@ public class SignalProcessingTest {
     @Test
     public void canApplyLowPassFilter() {
         // given
-        SignalProcessorChain chain = new LowPassFilter();
+        SignalProcessorChain chain = new LowPassFilter(30);
 
         // when
         int[] processed = chain.process(rawSignal);

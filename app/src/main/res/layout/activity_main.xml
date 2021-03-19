@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        style="?android:progressBarStyleHorizontal"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="150dp"-->
-<!--        android:progress="80"-->
-<!--        android:progressDrawable="@drawable/circle"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <TextView
         android:id="@+id/heartRate"
         android:layout_width="wrap_content"
@@ -45,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:background="@color/transparent"
-        android:contentDescription="@string/fingerprintButton"
+        android:contentDescription="@string/fingerprint_button_name"
         android:src="@drawable/ic_fingerprint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

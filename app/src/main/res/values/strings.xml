@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PPG</string>
-    <string name="buttonText">HR</string>
-    <string name="fingerprintButton">pushButtonForMeasurement</string>
+    <string name="fingerprint_button_name">pushButtonForMeasurement</string>
+    <string name="default_heart_rate">0</string>
 </resources>

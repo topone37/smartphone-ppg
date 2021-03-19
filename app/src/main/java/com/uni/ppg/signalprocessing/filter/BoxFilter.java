@@ -3,8 +3,6 @@ package com.uni.ppg.signalprocessing.filter;
 import com.elvishew.xlog.XLog;
 import com.uni.ppg.signalprocessing.SignalProcessorChain;
 
-import java.util.Arrays;
-
 /**
  * This signal processing step applies a 1D box filter with a desired window size to the signal.
  * The filter cannot be applied to window size -1 points.
@@ -27,7 +25,7 @@ public class BoxFilter extends SignalProcessorChain {
 
     @Override
     public int[] process(int[] signal) {
-        XLog.d("Applying box filter with window size: %d", windowSize);
+        XLog.d("Running box filtering (window size: %d)", windowSize);
         int[] filtered = filter(signal);
         return processNext(filtered);
     }

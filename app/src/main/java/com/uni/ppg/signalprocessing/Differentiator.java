@@ -2,6 +2,8 @@ package com.uni.ppg.signalprocessing;
 
 import com.elvishew.xlog.XLog;
 
+import java.util.Arrays;
+
 /**
  * This signal processing step approximates the derivative of the
  * curve using a centered difference.

@@ -6,7 +6,7 @@ public class ResultValidator extends SignalProcessorChain {
 
     @Override
     public int[] process(int[] signal) {
-        XLog.d("Validating results. Number of maxima found: %d", signal.length);
+        XLog.d("Running result validation - number of maxima: %d", signal.length);
         return processNext(signal);
     }
 }

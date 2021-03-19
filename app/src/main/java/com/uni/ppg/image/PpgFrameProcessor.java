@@ -12,10 +12,11 @@ import com.uni.ppg.adapter.HeartRate;
 import com.uni.ppg.adapter.HeartRateAdapter;
 import com.uni.ppg.signalprocessing.Differentiator;
 import com.uni.ppg.signalprocessing.MaximaCalculator;
+import com.uni.ppg.signalprocessing.Preprocessor;
 import com.uni.ppg.signalprocessing.ResultValidator;
+import com.uni.ppg.signalprocessing.RollingAverage;
 import com.uni.ppg.signalprocessing.SignalProcessorChain;
-import com.uni.ppg.signalprocessing.filter.BoxFilter;
-import com.uni.ppg.signalprocessing.filter.GaussianBlur;
+import com.uni.ppg.signalprocessing.filter.LowPassFilter;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CompletableFuture;
@@ -77,8 +78,9 @@ public class PpgFrameProcessor implements FrameProcessor {
     }
 
     private int[] processSignal(int[] unprocessedSignal) {
-        SignalProcessorChain chain = new BoxFilter();
-        chain.linkWith(new GaussianBlur())
+        SignalProcessorChain chain = new Preprocessor();
+        chain.linkWith(new RollingAverage())
+                .linkWith(new LowPassFilter(30))
                 .linkWith(new Differentiator())
                 .linkWith(new MaximaCalculator())
                 .linkWith(new ResultValidator());

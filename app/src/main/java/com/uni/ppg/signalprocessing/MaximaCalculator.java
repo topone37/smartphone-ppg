@@ -2,6 +2,7 @@ package com.uni.ppg.signalprocessing;
 
 import com.elvishew.xlog.XLog;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
