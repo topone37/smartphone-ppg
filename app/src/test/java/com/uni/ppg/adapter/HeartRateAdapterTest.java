@@ -21,7 +21,7 @@ public class HeartRateAdapterTest {
     }
 
     @Test
-    public void name() {
+    public void canAdaptHeartRate() {
         // given
         HeartRate adapter = new HeartRateAdapter(zeros, time);
 
