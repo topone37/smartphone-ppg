@@ -23,10 +23,12 @@ This way the light reflected from the finger is collected by the camera. HR is c
 
 ## Usage
 1. Place a single finger on the back of your phone and cover both the camera and the flash
-2. Press the HR button, and do not release until you wish to finish the measurement
+2. Press the fingerprint button, and do not release until you wish to finish the measurement
 3. A new calculated HR will appear on the screen every 3 seconds
 
 > Note: try to stay still for the best results while holding the button (the device will notify you otherwise)
+
+![gui](readme_images/gui.jpg)
 
 ## How does it work?
 The light reflected from the fingertip is collected. The total intensity of the red component is calculated for each frame. 
