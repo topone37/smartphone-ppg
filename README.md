@@ -1,4 +1,9 @@
 # Smartphone photoplethysmography (SPPG)
+
+## About
+This project can be used to quickly measure heart reate with using only a smartphone, no extra hardware needed.  
+This is an Android application with a very simple user interface, 
+
 ## What is [PPG](https://en.wikipedia.org/wiki/Photoplethysmogram)?
 #### Plethysmography is the science of measuring volume changes in different parts of the body.
 
