@@ -38,6 +38,9 @@ signal processing steps. The heart rate is calculated from the distances of the 
 The signal looks something like this, before applying filters for smoothing:  
 ![raw_signal](readme_images/raw_signal.jpg)
 
+### Processing steps
+![processing](readme_images/steps.jpg)
+
 ## Credits
 The project is built on the frame processing capabilities of [CameraView](https://github.com/natario1/CameraView) (a wrapper library for the android Camera 1 and 2 API).  
 Low Pass Filtering is achieved with the [iirj library](https://github.com/berndporr/iirj) 
