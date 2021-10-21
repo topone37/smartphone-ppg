@@ -31,6 +31,6 @@ public class SignalProcessorChainTest extends TestBase {
         int[] processed = pipeline.execute(rawSignal);
 
         // then
-        assertThat(processed).hasSize(7);
+        assertThat(processed).hasSize(6);
     }
 }
