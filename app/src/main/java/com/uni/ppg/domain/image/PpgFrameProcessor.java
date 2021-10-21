@@ -1,4 +1,4 @@
-package com.uni.ppg.image;
+package com.uni.ppg.domain.image;
 
 import android.widget.TextView;
 
@@ -8,22 +8,22 @@ import androidx.annotation.WorkerThread;
 import com.otaliastudios.cameraview.frame.Frame;
 import com.otaliastudios.cameraview.frame.FrameProcessor;
 import com.otaliastudios.cameraview.size.Size;
-import com.uni.ppg.adapter.HeartRate;
-import com.uni.ppg.adapter.HeartRateAdapter;
-import com.uni.ppg.signalprocessing.Differentiator;
-import com.uni.ppg.signalprocessing.MaximaCalculator;
-import com.uni.ppg.signalprocessing.Preprocessor;
-import com.uni.ppg.signalprocessing.ResultValidator;
-import com.uni.ppg.signalprocessing.RollingAverage;
-import com.uni.ppg.signalprocessing.SignalProcessorChain;
-import com.uni.ppg.signalprocessing.filter.LowPassFilter;
+import com.uni.ppg.domain.adapter.HeartRate;
+import com.uni.ppg.domain.adapter.HeartRateAdapter;
+import com.uni.ppg.domain.signalprocessing.Differentiator;
+import com.uni.ppg.domain.signalprocessing.MaximaCalculator;
+import com.uni.ppg.domain.signalprocessing.Preprocessor;
+import com.uni.ppg.domain.signalprocessing.ResultValidator;
+import com.uni.ppg.domain.signalprocessing.RollingAverage;
+import com.uni.ppg.domain.signalprocessing.SignalProcessorChain;
+import com.uni.ppg.domain.signalprocessing.filter.LowPassFilter;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-import static com.uni.ppg.PpgApplication.executor;
+import static com.uni.ppg.root.PpgApplication.executor;
 import static com.uni.ppg.constant.GlobalConstants.BATCH_SIZE;
 
 public class PpgFrameProcessor implements FrameProcessor {

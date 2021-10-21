@@ -1,4 +1,4 @@
-package com.uni.ppg.image;
+package com.uni.ppg.domain.image;
 
 public class PixelProcessor {
 

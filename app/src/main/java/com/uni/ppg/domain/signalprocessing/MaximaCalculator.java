@@ -1,8 +1,7 @@
-package com.uni.ppg.signalprocessing;
+package com.uni.ppg.domain.signalprocessing;
 
 import com.elvishew.xlog.XLog;
 
-import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**

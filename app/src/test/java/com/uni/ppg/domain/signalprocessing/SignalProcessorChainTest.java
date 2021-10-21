@@ -1,9 +1,9 @@
-package com.uni.ppg.signalprocessing;
+package com.uni.ppg.domain.signalprocessing;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
-import com.uni.ppg.signalprocessing.filter.BoxFilter;
-import com.uni.ppg.signalprocessing.filter.GaussianBlur;
+import com.uni.ppg.domain.signalprocessing.filter.BoxFilter;
+import com.uni.ppg.domain.signalprocessing.filter.GaussianBlur;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

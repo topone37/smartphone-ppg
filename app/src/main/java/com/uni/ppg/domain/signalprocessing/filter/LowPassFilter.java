@@ -1,7 +1,7 @@
-package com.uni.ppg.signalprocessing.filter;
+package com.uni.ppg.domain.signalprocessing.filter;
 
 import com.elvishew.xlog.XLog;
-import com.uni.ppg.signalprocessing.SignalProcessorChain;
+import com.uni.ppg.domain.signalprocessing.SignalProcessorChain;
 
 import uk.me.berndporr.iirj.Butterworth;
 

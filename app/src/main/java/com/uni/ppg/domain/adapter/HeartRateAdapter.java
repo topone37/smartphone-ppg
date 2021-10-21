@@ -1,4 +1,4 @@
-package com.uni.ppg.adapter;
+package com.uni.ppg.domain.adapter;
 
 import java.util.Locale;
 import java.util.stream.LongStream;

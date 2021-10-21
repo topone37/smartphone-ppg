@@ -1,7 +1,7 @@
-package com.uni.ppg.signalprocessing.filter;
+package com.uni.ppg.domain.signalprocessing.filter;
 
 import com.elvishew.xlog.XLog;
-import com.uni.ppg.signalprocessing.SignalProcessorChain;
+import com.uni.ppg.domain.signalprocessing.SignalProcessorChain;
 
 /**
  * This signal processing step applies a 1D box filter with a desired window size to the signal.

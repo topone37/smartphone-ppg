@@ -1,4 +1,4 @@
-package com.uni.ppg.signalprocessing;
+package com.uni.ppg.domain.signalprocessing;
 
 import com.elvishew.xlog.XLog;
 

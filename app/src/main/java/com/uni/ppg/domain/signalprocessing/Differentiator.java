@@ -1,8 +1,6 @@
-package com.uni.ppg.signalprocessing;
+package com.uni.ppg.domain.signalprocessing;
 
 import com.elvishew.xlog.XLog;
-
-import java.util.Arrays;
 
 /**
  * This signal processing step approximates the derivative of the
