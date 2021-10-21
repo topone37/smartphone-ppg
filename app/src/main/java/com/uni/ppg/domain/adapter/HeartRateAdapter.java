@@ -10,31 +10,31 @@ import java.util.stream.LongStream;
  */
 public class HeartRateAdapter implements HeartRate {
 
-    private final int[] timeSeries;
+    private final int[] signal;
     private final long[] timeStamps;
     private final int numberOfBeats;
 
-    public HeartRateAdapter(int[] timeSeries, long[] timeStamps) {
-        this.timeSeries = timeSeries;
+    public HeartRateAdapter(int[] signal, long[] timeStamps) {
+        this.signal = signal;
         this.timeStamps = timeStamps;
-        this.numberOfBeats = timeSeries.length - 1;
+        this.numberOfBeats = signal.length - 1;
     }
 
     public String convertToHeartRate() {
-        long[] beatsInABatch = beatsInABatch();
-        double beatsPerMinute = convertToBeatsPerMinute(beatsInABatch);
+        long[] beatsInABatch = calculateBeatsInABatch();
+        double beatsPerMinute = convertToBPM(beatsInABatch);
         return toPrintableFormat(beatsPerMinute);
     }
 
-    private long[] beatsInABatch() {
+    private long[] calculateBeatsInABatch() {
         long[] beatsInABatch = new long[numberOfBeats];
         for (int i = 0; i < numberOfBeats; i++) {
-            beatsInABatch[i] = timeStamps[timeSeries[i + 1]] - timeStamps[timeSeries[i]];
+            beatsInABatch[i] = timeStamps[signal[i + 1]] - timeStamps[signal[i]];
         }
         return beatsInABatch;
     }
 
-    private double convertToBeatsPerMinute(long[] beatsInABatch) {
+    private double convertToBPM(long[] beatsInABatch) {
         double averageHeartRateInMillis = LongStream.of(beatsInABatch).average().orElse(0d);
         return 60000d / averageHeartRateInMillis;
     }

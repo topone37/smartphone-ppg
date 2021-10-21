@@ -1,11 +1,10 @@
 package com.uni.ppg.domain.signalprocessing;
 
-import com.elvishew.xlog.LogLevel;
-import com.elvishew.xlog.XLog;
-import com.uni.ppg.domain.signalprocessing.filter.BoxFilter;
-import com.uni.ppg.domain.signalprocessing.filter.GaussianBlur;
+import com.uni.ppg.domain.TestBase;
+import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
+import com.uni.ppg.domain.signalprocessing.pipeline.PpgProcessingPipeline;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,26 +13,24 @@ import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SignalProcessorChainTest {
+public class SignalProcessorChainTest extends TestBase {
 
-    private static int[] rawSignal;
+    private int[] rawSignal;
 
-    @BeforeClass
-    public static void beforeClass() throws IOException {
-        XLog.init(LogLevel.ALL);
+    @Before
+    public void before() throws IOException {
         rawSignal = Files.lines(Paths.get("src/test/resources/data_points.txt")).mapToInt(Integer::valueOf).toArray();
     }
 
     @Test
     public void canApplyConsecutiveProcessingSteps() {
         // given
-        SignalProcessorChain chain = new BoxFilter();
-        chain.linkWith(new GaussianBlur()).linkWith(new Differentiator()).linkWith(new MaximaCalculator());
+        Pipeline pipeline = PpgProcessingPipeline.pipeline();
 
         // when
-        int[] processed = chain.process(rawSignal);
+        int[] processed = pipeline.execute(rawSignal);
 
         // then
-        assertThat(processed).hasSize(6);
+        assertThat(processed).hasSize(7);
     }
 }

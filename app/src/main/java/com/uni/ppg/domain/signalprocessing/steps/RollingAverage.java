@@ -1,4 +1,4 @@
-package com.uni.ppg.domain.signalprocessing;
+package com.uni.ppg.domain.signalprocessing.steps;
 
 import com.elvishew.xlog.XLog;
 
@@ -10,7 +10,7 @@ import java.util.Arrays;
  * The rolling AVG is calculated from a number of points equal to the windowsSize.
  * Default window size 10.
  */
-public class RollingAverage extends SignalProcessorChain {
+public class RollingAverage implements Step {
 
     private final int windowSize;
 
@@ -23,9 +23,9 @@ public class RollingAverage extends SignalProcessorChain {
     }
 
     @Override
-    public int[] process(int[] signal) {
-        XLog.d("Running rolling average subtraction");
-        return processNext(subtractAverage(signal));
+    public int[] invoke(int[] signal) {
+        XLog.i("Running rolling average subtraction");
+        return subtractAverage(signal);
     }
 
     /**

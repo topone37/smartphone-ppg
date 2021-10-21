@@ -10,21 +10,17 @@ import com.otaliastudios.cameraview.frame.FrameProcessor;
 import com.otaliastudios.cameraview.size.Size;
 import com.uni.ppg.domain.adapter.HeartRate;
 import com.uni.ppg.domain.adapter.HeartRateAdapter;
-import com.uni.ppg.domain.signalprocessing.Differentiator;
-import com.uni.ppg.domain.signalprocessing.MaximaCalculator;
-import com.uni.ppg.domain.signalprocessing.Preprocessor;
-import com.uni.ppg.domain.signalprocessing.ResultValidator;
-import com.uni.ppg.domain.signalprocessing.RollingAverage;
-import com.uni.ppg.domain.signalprocessing.SignalProcessorChain;
-import com.uni.ppg.domain.signalprocessing.filter.LowPassFilter;
+import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
+import com.uni.ppg.domain.signalprocessing.pipeline.PpgProcessingPipeline;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-import static com.uni.ppg.root.PpgApplication.executor;
 import static com.uni.ppg.constant.GlobalConstants.BATCH_SIZE;
+import static com.uni.ppg.domain.image.PixelProcessor.yuvToRedSum;
+import static com.uni.ppg.root.PpgApplication.executor;
 
 public class PpgFrameProcessor implements FrameProcessor {
 
@@ -57,7 +53,7 @@ public class PpgFrameProcessor implements FrameProcessor {
     @WorkerThread
     public void process(@NonNull Frame frame) {
         Size size = frame.getSize();
-        int redSum = PixelProcessor.yuvToRedSum(frame.getData(), size.getWidth(), size.getHeight());
+        int redSum = yuvToRedSum(frame.getData(), size.getWidth(), size.getHeight());
         signal[frameCounter] = redSum;
         time[frameCounter] = frame.getTime();
 
@@ -78,13 +74,8 @@ public class PpgFrameProcessor implements FrameProcessor {
     }
 
     private int[] processSignal(int[] unprocessedSignal) {
-        SignalProcessorChain chain = new Preprocessor();
-        chain.linkWith(new RollingAverage())
-                .linkWith(new LowPassFilter(30))
-                .linkWith(new Differentiator())
-                .linkWith(new MaximaCalculator())
-                .linkWith(new ResultValidator());
-        return chain.process(unprocessedSignal);
+        Pipeline pipeline = PpgProcessingPipeline.pipeline();
+        return pipeline.execute(unprocessedSignal);
     }
 
     private String toHeartRate(int[] processedSignal, long[] timestamps) {

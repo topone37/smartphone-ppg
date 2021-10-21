@@ -1,14 +1,14 @@
-package com.uni.ppg.domain.signalprocessing.filter;
+package com.uni.ppg.domain.signalprocessing.steps.filter;
 
 import com.elvishew.xlog.XLog;
-import com.uni.ppg.domain.signalprocessing.SignalProcessorChain;
+import com.uni.ppg.domain.signalprocessing.steps.Step;
 
 /**
  * This signal processing step applies a 1D box filter with a desired window size to the signal.
  * The filter cannot be applied to window size -1 points.
  * For smoothing purposes.
  */
-public class BoxFilter extends SignalProcessorChain {
+public class BoxFilter implements Step {
 
     private final int windowSize;
     private final int padding;
@@ -24,14 +24,14 @@ public class BoxFilter extends SignalProcessorChain {
     }
 
     @Override
-    public int[] process(int[] signal) {
-        XLog.d("Running box filtering (window size: %d)", windowSize);
-        int[] filtered = filter(signal);
-        return processNext(filtered);
+    public int[] invoke(int[] signal) {
+        XLog.i("Running box filtering (window size: %d)", windowSize);
+        return filter(signal);
     }
 
     private int[] filter(int[] signal) {
         int[] filtered = new int[signal.length - 2 * padding];
+
         for (int i = padding; i <= filtered.length; i++) {
             int sum = 0;
             for (int j = 0; j < windowSize; j++) {
@@ -39,6 +39,7 @@ public class BoxFilter extends SignalProcessorChain {
             }
             filtered[i - padding] = sum / windowSize;
         }
+
         return filtered;
     }
 }

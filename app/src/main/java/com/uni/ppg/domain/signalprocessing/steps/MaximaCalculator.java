@@ -1,4 +1,4 @@
-package com.uni.ppg.domain.signalprocessing;
+package com.uni.ppg.domain.signalprocessing.steps;
 
 import com.elvishew.xlog.XLog;
 
@@ -9,23 +9,25 @@ import java.util.stream.IntStream;
  * and identifies the indexes where the derivative curve has a value of zero.
  * Since the it is a series of discrete data, the first point before the zero is considered.
  */
-public class MaximaCalculator extends SignalProcessorChain {
+public class MaximaCalculator implements Step {
 
     @Override
-    public int[] process(int[] signal) {
-        XLog.d("Running maxima determination");
-        int[] maxima = findMaxima(signal);
-        return processNext(maxima);
+    public int[] invoke(int[] signal) {
+        XLog.i("Running maxima determination");
+        return findMaxima(signal);
     }
 
     private int[] findMaxima(int[] firstDerivative) {
         int[] secondDerivative = difference(firstDerivative);
-        return IntStream.of(findZerosIn(firstDerivative)).filter(i -> secondDerivative[i] <= 0).toArray();
+        return IntStream.of(findZerosIn(firstDerivative))
+                .filter(i -> secondDerivative[i - 1] <= 0)
+                .map(i -> i + 1) // leading point lost due to derivation
+                .toArray();
     }
 
     private int[] difference(int[] firstDerivative) {
-        Differentiator differentiator = new Differentiator();
-        return differentiator.process(firstDerivative);
+        Derivation derivation = new Derivation();
+        return derivation.invoke(firstDerivative);
     }
 
     private int[] findZerosIn(int[] firstDerivative) {

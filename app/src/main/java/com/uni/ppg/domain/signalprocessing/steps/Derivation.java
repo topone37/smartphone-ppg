@@ -1,4 +1,4 @@
-package com.uni.ppg.domain.signalprocessing;
+package com.uni.ppg.domain.signalprocessing.steps;
 
 import com.elvishew.xlog.XLog;
 
@@ -6,13 +6,12 @@ import com.elvishew.xlog.XLog;
  * This signal processing step approximates the derivative of the
  * curve using a centered difference.
  */
-public class Differentiator extends SignalProcessorChain {
+public class Derivation implements Step {
 
     @Override
-    public int[] process(int[] signal) {
-        XLog.d("Running differentiation");
-        int[] derivative = centeredDifference(signal);
-        return processNext(derivative);
+    public int[] invoke(int[] signal) {
+        XLog.i("Running differentiation");
+        return centeredDifference(signal);
     }
 
     private int[] centeredDifference(int[] signal) {

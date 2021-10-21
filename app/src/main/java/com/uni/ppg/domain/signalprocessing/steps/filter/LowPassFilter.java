@@ -1,7 +1,7 @@
-package com.uni.ppg.domain.signalprocessing.filter;
+package com.uni.ppg.domain.signalprocessing.steps.filter;
 
 import com.elvishew.xlog.XLog;
-import com.uni.ppg.domain.signalprocessing.SignalProcessorChain;
+import com.uni.ppg.domain.signalprocessing.steps.Step;
 
 import uk.me.berndporr.iirj.Butterworth;
 
@@ -10,7 +10,7 @@ import uk.me.berndporr.iirj.Butterworth;
  * time series, with a cutoff of 4Hz. The sampling rate
  * is approximately equal to the camera's frame processing speed in FPS.
  */
-public class LowPassFilter extends SignalProcessorChain {
+public class LowPassFilter implements Step {
 
     private final Butterworth butterworth = new Butterworth();
 
@@ -19,14 +19,13 @@ public class LowPassFilter extends SignalProcessorChain {
     }
 
     @Override
-    public int[] process(int[] signal) {
-        XLog.d("Running low pass filter");
-        int[] filtered = filter(signal);
-        return processNext(filtered);
+    public int[] invoke(int[] signal) {
+        XLog.i("Running low pass filter");
+        return filter(signal);
     }
 
     private int[] filter(int[] signal) {
-        int[] filtered = new int[signal.length - 1];
+        int[] filtered = new int[signal.length];
         for (int i = 0; i < signal.length; i++) {
             filtered[i] = (int) butterworth.filter(signal[i]);
         }

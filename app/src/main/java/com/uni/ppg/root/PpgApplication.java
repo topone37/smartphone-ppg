@@ -11,13 +11,11 @@ import java.util.concurrent.TimeUnit;
 
 public class PpgApplication extends Application {
 
-    private static final int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    static {
         XLog.init(LogLevel.ALL);
     }
+
+    private static final int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
 
     public static ThreadPoolExecutor executor() {
         return new ThreadPoolExecutor(

@@ -1,9 +1,9 @@
-package com.uni.ppg.domain.signalprocessing.filter;
+package com.uni.ppg.domain.signalprocessing.steps.filter;
 
 import com.elvishew.xlog.XLog;
-import com.uni.ppg.domain.signalprocessing.SignalProcessorChain;
+import com.uni.ppg.domain.signalprocessing.steps.Step;
 
-public class GaussianBlur extends SignalProcessorChain {
+public class GaussianBlur implements Step {
 
     private final float[] coefficients = new float[]{0.004f, 0.054f, 0.242f, 0.401f, 0.242f, 0.054f, 0.004f};
     private final int padding;
@@ -13,10 +13,9 @@ public class GaussianBlur extends SignalProcessorChain {
     }
 
     @Override
-    public int[] process(int[] signal) {
-        XLog.d("Applying Gaussian blur");
-        int[] filtered = filter(signal);
-        return processNext(filtered);
+    public int[] invoke(int[] signal) {
+        XLog.i("Applying Gaussian blur");
+        return filter(signal);
     }
 
     private int[] filter(int[] signal) {

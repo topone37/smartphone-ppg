@@ -1,4 +1,4 @@
-package com.uni.ppg.domain.signalprocessing;
+package com.uni.ppg.domain.signalprocessing.steps;
 
 import com.elvishew.xlog.XLog;
 
@@ -9,14 +9,13 @@ import java.util.stream.IntStream;
  * This signal processing step converts reflected light information to
  * absorption.
  */
-public class Preprocessor extends SignalProcessorChain {
+public class Preprocessor implements Step {
 
     @Override
-    public int[] process(int[] signal) {
+    public int[] invoke(int[] signal) {
         XLog.d("Running preprocessor");
         int max = max(signal);
-        int[] absorbed = IntStream.of(signal).map(i -> max - i).toArray();
-        return processNext(absorbed);
+        return IntStream.of(signal).map(i -> max - i).toArray();
     }
 
     private int max(int[] signal) {

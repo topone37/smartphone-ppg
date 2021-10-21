@@ -1,5 +1,9 @@
 package com.uni.ppg.domain.image;
 
+/**
+ * This class is responsible for converting the YUV format byte array
+ * of a camera frame, to the sum of red components for the whole image.
+ */
 public class PixelProcessor {
 
     private static final int TWO_18 = 262143;
@@ -8,10 +12,6 @@ public class PixelProcessor {
     private static final int MASK_GREEN = 0xff00;
     private static final int MASK_BLUE = 0xff;
 
-    /**
-     * This method is responsible for converting the YUV format byte array
-     * of a camera frame, to the sum of red components for the whole image.
-     */
     public static int yuvToRedSum(byte[] yuv, int width, int height) {
         int frameSize = width * height;
         int sum = 0;
