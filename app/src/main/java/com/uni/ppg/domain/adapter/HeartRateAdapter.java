@@ -10,22 +10,28 @@ import java.util.stream.LongStream;
  */
 public class HeartRateAdapter implements HeartRate {
 
-    private final int[] zeros;
-    private final long[] time;
+    private final int[] timeSeries;
+    private final long[] timeStamps;
     private final int numberOfBeats;
 
-    public HeartRateAdapter(int[] zeros, long[] time) {
-        this.zeros = zeros;
-        this.time = time;
-        this.numberOfBeats = zeros.length - 1;
+    public HeartRateAdapter(int[] timeSeries, long[] timeStamps) {
+        this.timeSeries = timeSeries;
+        this.timeStamps = timeStamps;
+        this.numberOfBeats = timeSeries.length - 1;
     }
 
     public String convertToHeartRate() {
+        long[] beatsInABatch = beatsInABatch();
+        double beatsPerMinute = convertToBeatsPerMinute(beatsInABatch);
+        return toPrintableFormat(beatsPerMinute);
+    }
+
+    private long[] beatsInABatch() {
         long[] beatsInABatch = new long[numberOfBeats];
         for (int i = 0; i < numberOfBeats; i++) {
-            beatsInABatch[i] = time[zeros[i + 1]] - time[zeros[i]];
+            beatsInABatch[i] = timeStamps[timeSeries[i + 1]] - timeStamps[timeSeries[i]];
         }
-        return uiRepresentation(convertToBeatsPerMinute(beatsInABatch));
+        return beatsInABatch;
     }
 
     private double convertToBeatsPerMinute(long[] beatsInABatch) {
@@ -33,7 +39,7 @@ public class HeartRateAdapter implements HeartRate {
         return 60000d / averageHeartRateInMillis;
     }
 
-    private String uiRepresentation(double averageHeartRate) {
+    private String toPrintableFormat(double averageHeartRate) {
         return String.format(Locale.ENGLISH, "%.0f", averageHeartRate);
     }
 }
