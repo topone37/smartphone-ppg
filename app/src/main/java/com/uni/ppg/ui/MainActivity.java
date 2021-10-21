@@ -31,16 +31,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initCamera() {
-        camera = findViewById(R.id.camera);
+        camera = findViewById(R.id.view_camera);
         camera.setVisibility(View.INVISIBLE);
         camera.setLifecycleOwner(this);
         camera.setFrameProcessingFormat(ImageFormat.YUV_420_888);
-        heartRate = findViewById(R.id.heartRate);
+        heartRate = findViewById(R.id.text_heart_rate);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void initButton() {
-        ImageButton button = findViewById(R.id.fingerprintButton);
+        ImageButton button = findViewById(R.id.btn_fingerprint);
         button.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 camera.setFlash(Flash.TORCH);

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PPG</string>
-    <string name="fingerprint_button_name">pushButtonForMeasurement</string>
-    <string name="default_heart_rate">0</string>
-    <string name="heartimage">heartImage</string>
-    <string name="default_hr">60</string>
+
+    <string name="btn_fingerprint">push_this_for_measurement</string>
+    <string name="description_image_heart">heart_image</string>
+    <string name="label_default_heart_rate">60</string>
 </resources>

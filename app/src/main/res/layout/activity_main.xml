@@ -7,11 +7,11 @@
     tools:context=".ui.MainActivity">
 
     <TextView
-        android:id="@+id/heartRate"
+        android:id="@+id/text_heart_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="@string/default_hr"
+        android:layout_marginTop="@dimen/margin_150dp"
+        android:text="@string/label_default_heart_rate"
         android:textColor="@color/primaryGreen"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,30 +21,30 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:contentDescription="@string/heartimage"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:contentDescription="@string/description_image_heart"
         android:src="@drawable/ic_heart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/heartRate" />
+        app:layout_constraintTop_toBottomOf="@id/text_heart_rate" />
 
     <com.otaliastudios.cameraview.CameraView
-        android:id="@+id/camera"
+        android:id="@+id/view_camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp"
         android:keepScreenOn="true"
-        app:layout_constraintBottom_toTopOf="@id/fingerprintButton"
+        app:layout_constraintBottom_toTopOf="@id/btn_fingerprint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/fingerprintButton"
+        android:id="@+id/btn_fingerprint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:background="@color/transparent"
-        android:contentDescription="@string/fingerprint_button_name"
+        android:contentDescription="@string/btn_fingerprint"
         android:src="@drawable/ic_fingerprint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
