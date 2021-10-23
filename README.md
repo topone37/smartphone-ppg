@@ -41,19 +41,19 @@ The signal looks something like this, before applying filters for smoothing:
 ## Processing steps
 ![processing](readme_images/steps.jpg)
 
-1. Preprocessing
+1. Preprocessing 
 The sum of the R channel from each frame is fed to the preprocessor, which transforms the values to a light absorption curve
-2. Detrending
+2. Detrending 
 A rolling average (calculated from 10 points) is subtracted from the signal
-3. Low pass filtering
+3. Low pass filtering 
 Removing high frequency noise (cutoff is 4 Hz)
-4. Gauss filtering
+4. Gauss filtering 
 Smoothing signal
-5. Derivation
+5. Derivation 
 Estimating first derivative with centered difference
-6. Calculating maxima
+6. Calculating maxima 
 Determine maximum points after producing the second order derivative
-7. Validating results
+7. Validating results 
 Indicating whether the number of maxima is enough for HR calculation
 
 ## Credits
