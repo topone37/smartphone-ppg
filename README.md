@@ -38,8 +38,23 @@ signal processing steps. The heart rate is calculated from the distances of the 
 The signal looks something like this, before applying filters for smoothing:  
 ![raw_signal](readme_images/raw_signal.jpg)
 
-### Processing steps
+## Processing steps
 ![processing](readme_images/steps.jpg)
+
+1. Preprocessing
+The sum of the R channel from each frame is fed to the preprocessor, which transforms the values to a light absorption curve
+2. Detrending
+A rolling average (calculated from 10 points) is subtracted from the signal
+3. Low pass filtering
+Removing high frequency noise (cutoff is 4 Hz)
+4. Gauss filtering
+Smoothing signal
+5. Derivation
+Estimating first derivative with centered difference
+6. Calculating maxima
+Determine maximum points after producing the second order derivative
+7. Validating results
+Indicating whether the number of maxima is enough for HR calculation
 
 ## Credits
 The project is built on the frame processing capabilities of [CameraView](https://github.com/natario1/CameraView) (a wrapper library for the android Camera 1 and 2 API).  
