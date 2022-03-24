@@ -10,6 +10,10 @@ import java.util.stream.LongStream;
  */
 public class HeartRateAdapter implements HeartRate {
 
+    private static final double MISSING_HEART_RATE = 0d;
+    private static final double MILLIS_IN_A_MINUTE = 60000d;
+    private static final String HEART_RATE_FORMAT = "%.0f";
+
     private final int[] signal;
     private final long[] timeStamps;
     private final int numberOfBeats;
@@ -35,11 +39,12 @@ public class HeartRateAdapter implements HeartRate {
     }
 
     private double convertToBPM(long[] beatsInABatch) {
-        double averageHeartRateInMillis = LongStream.of(beatsInABatch).average().orElse(0d);
-        return 60000d / averageHeartRateInMillis;
+        double averageHeartRateInMillis = LongStream.of(beatsInABatch).average().orElse(MISSING_HEART_RATE);
+        return MILLIS_IN_A_MINUTE / averageHeartRateInMillis;
     }
 
     private String toPrintableFormat(double averageHeartRate) {
-        return String.format(Locale.ENGLISH, "%.0f", averageHeartRate);
+        return String.format(Locale.ENGLISH, HEART_RATE_FORMAT, averageHeartRate);
     }
+
 }
