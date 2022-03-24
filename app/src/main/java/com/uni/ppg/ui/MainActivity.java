@@ -5,7 +5,6 @@ import android.graphics.ImageFormat;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,18 +39,37 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void initButton() {
-        ImageButton button = findViewById(R.id.btn_fingerprint);
-        button.setOnTouchListener((v, event) -> {
+        findViewById(R.id.btn_start_measurement).setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                camera.setFlash(Flash.TORCH);
-                camera.addFrameProcessor(new PpgFrameProcessor(new WeakReference<>(heartRate)));
+                startMeasurement();
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                camera.setFlash(Flash.OFF);
-                camera.clearFrameProcessors();
-                heartRate.setText("");
+                stopMeasurement();
             }
             return false;
         });
+    }
+
+    /**
+     * Starting heart rate measurement:
+     * - flash is turned on
+     * - processing consecutive frames starts
+     * - label showing heart rate will later be updated according to new results
+     */
+    private void startMeasurement() {
+        camera.setFlash(Flash.TORCH);
+        camera.addFrameProcessor(new PpgFrameProcessor(new WeakReference<>(heartRate)));
+    }
+
+    /**
+     * Stopping heart rate measurement:
+     * - flash is turned off
+     * - processing frames stops
+     * - label showing heart rate is cleared
+     */
+    private void stopMeasurement() {
+        camera.setFlash(Flash.OFF);
+        camera.clearFrameProcessors();
+        heartRate.setText(R.string.label_empty);
     }
 
     @Override

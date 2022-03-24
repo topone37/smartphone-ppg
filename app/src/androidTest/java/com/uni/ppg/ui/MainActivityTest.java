@@ -24,7 +24,7 @@ public class MainActivityTest {
 
     @Test
     public void canDisplayFingerprint() {
-        onView(withId(R.id.btn_fingerprint)).check(matches(isDisplayed()));
+        onView(withId(R.id.btn_start_measurement)).check(matches(isDisplayed()));
     }
 
     @Test
