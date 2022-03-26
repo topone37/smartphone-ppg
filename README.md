@@ -49,6 +49,10 @@ The signal looks something like this, before applying filters for smoothing:
 6. Calculating maxima: determine maximum points after producing the second order derivative
 7. Validating results: indicating whether the number of maxima is enough for HR calculation
 
+## Features
+The application is monitoring the movement of the device during heart rate measurements.
+A toast notification tells the user to keep the device still in case too much movement is detected.
+
 ## Credits
 The project is built on the frame processing capabilities of [CameraView](https://github.com/natario1/CameraView) (a wrapper library for the android Camera 1 and 2 API).  
 Low Pass Filtering is achieved with the [iirj library](https://github.com/berndporr/iirj) 

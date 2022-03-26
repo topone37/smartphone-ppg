@@ -5,4 +5,5 @@
     <string name="description_image_heart">heart_image</string>
     <string name="label_default_heart_rate">60</string>
     <string name="label_empty" />
+    <string name="toast_keep_device_still">Keep device still</string>
 </resources>
