@@ -1,5 +1,7 @@
 package com.uni.ppg.listener;
 
+import static com.uni.ppg.constant.GlobalConstants.MEASUREMENT_PHASE_CHANGE;
+
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -55,13 +57,8 @@ public class MotionMonitoringService extends Service {
     }
 
     private void listenToBroadcast() {
-        broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                XLog.i("Measurement phase changed");
-            }
-        };
-        registerReceiver(broadcastReceiver, new IntentFilter("MEASUREMENT_PHASE_CHANGE"));
+        broadcastReceiver = new PhaseChangedBroadcast();
+        registerReceiver(broadcastReceiver, new IntentFilter(MEASUREMENT_PHASE_CHANGE));
     }
 
     @Override
