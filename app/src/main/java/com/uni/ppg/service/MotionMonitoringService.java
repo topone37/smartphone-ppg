@@ -1,4 +1,4 @@
-package com.uni.ppg.listener;
+package com.uni.ppg.service;
 
 import static com.uni.ppg.constant.GlobalConstants.MEASUREMENT_PHASE_CHANGE;
 
@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
+import com.uni.ppg.R;
+import com.uni.ppg.constant.GlobalConstants;
 
 public class MotionMonitoringService extends Service {
 
@@ -38,7 +40,6 @@ public class MotionMonitoringService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         initAccelerationSensor();
-        listenToSensor();
         listenToBroadcast();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -50,9 +51,8 @@ public class MotionMonitoringService extends Service {
 
     private void listenToSensor() {
         if (acceleration != null) {
-            motionListener = new MotionListener(() -> Toast.makeText(this, "Stay still", Toast.LENGTH_SHORT).show());
+            motionListener = new MotionListener(() -> Toast.makeText(this, R.string.toast_keep_device_still, Toast.LENGTH_SHORT).show());
             sensorManager.registerListener(motionListener, acceleration, SensorManager.SENSOR_DELAY_NORMAL);
-            XLog.i("Sensor listener registered");
         }
     }
 
@@ -71,6 +71,22 @@ public class MotionMonitoringService extends Service {
     private void stopSensorListener() {
         if (acceleration != null) {
             sensorManager.unregisterListener(motionListener);
+        }
+    }
+
+    public class PhaseChangedBroadcast extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra(GlobalConstants.MEASUREMENT_PHASE_CHANGE);
+            if (message != null) {
+                XLog.i("Measurement phase changed to: " + message);
+                if (MeasurementPhase.valueOf(message) == MeasurementPhase.START) {
+                    listenToSensor();
+                } else {
+                    stopSensorListener();
+                }
+            }
         }
     }
 

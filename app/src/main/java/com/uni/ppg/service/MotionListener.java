@@ -1,4 +1,4 @@
-package com.uni.ppg.listener;
+package com.uni.ppg.service;
 
 import static com.uni.ppg.constant.GlobalConstants.ACCELEROMETER_LIMIT;
 

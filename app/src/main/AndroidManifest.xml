@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.uni.ppg">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -24,12 +25,13 @@
             </intent-filter>
         </activity>
         <service
-            android:name="com.uni.ppg.listener.MotionMonitoringService"
+            android:name="com.uni.ppg.service.MotionMonitoringService"
             android:enabled="true"
             android:exported="false" />
         <receiver
-            android:name="com.uni.ppg.listener.PhaseChangedBroadcast"
-            android:exported="false" />
+            android:name="com.uni.ppg.service.MotionMonitoringService$PhaseChangedBroadcast"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

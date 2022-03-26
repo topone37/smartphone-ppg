@@ -1,4 +1,4 @@
-package com.uni.ppg.listener;
+package com.uni.ppg.service;
 
 public interface ExcessiveMotionCallback {
     void onExcessiveMotion();

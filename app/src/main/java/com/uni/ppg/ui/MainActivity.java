@@ -15,8 +15,8 @@ import com.otaliastudios.cameraview.controls.Flash;
 import com.uni.ppg.R;
 import com.uni.ppg.constant.GlobalConstants;
 import com.uni.ppg.domain.image.PpgFrameProcessor;
-import com.uni.ppg.listener.MeasurementPhase;
-import com.uni.ppg.listener.MotionMonitoringService;
+import com.uni.ppg.service.MeasurementPhase;
+import com.uni.ppg.service.MotionMonitoringService;
 
 import java.lang.ref.WeakReference;
 
