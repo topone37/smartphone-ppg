@@ -1,16 +1,20 @@
 package com.uni.ppg.listener;
 
+import static com.uni.ppg.constant.GlobalConstants.ACCELEROMETER_LIMIT;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-import static com.uni.ppg.constant.GlobalConstants.ACCELEROMETER_LIMIT;
+/**
+ * This sensor event listener monitors the acceleration of the phone in all 3 directions.
+ * If the total acceleration exceeds a threshold, a callback is called to inform the user.
+ */
+public class MotionListener implements SensorEventListener {
 
-public class MovementListener implements SensorEventListener {
+    private final ExcessiveMotionCallback callback;
 
-    private final TooMuchMovementCallback callback;
-
-    public MovementListener(TooMuchMovementCallback callback) {
+    public MotionListener(ExcessiveMotionCallback callback) {
         this.callback = callback;
     }
 
@@ -23,7 +27,7 @@ public class MovementListener implements SensorEventListener {
 
             float total = (float) Math.sqrt(x * x + y * y + z * z);
             if (total > ACCELEROMETER_LIMIT) {
-                callback.onTooMuchMovement();
+                callback.onExcessiveMotion();
             }
         }
     }

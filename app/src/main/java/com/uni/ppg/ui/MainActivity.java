@@ -1,6 +1,7 @@
 package com.uni.ppg.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.ImageFormat;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -13,6 +14,7 @@ import com.otaliastudios.cameraview.CameraView;
 import com.otaliastudios.cameraview.controls.Flash;
 import com.uni.ppg.R;
 import com.uni.ppg.domain.image.PpgFrameProcessor;
+import com.uni.ppg.listener.MotionMonitoringService;
 
 import java.lang.ref.WeakReference;
 
@@ -50,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * This background service monitors the motion of the phone
+     * The phone needs to be still to do precise measurements
+     */
+    private Intent motionMonitoring() {
+        return new Intent(MainActivity.this, MotionMonitoringService.class);
+    }
+
+    /**
      * Starting heart rate measurement:
      * - flash is turned on
      * - processing consecutive frames starts
@@ -76,18 +86,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         camera.open();
+        startService(motionMonitoring());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         camera.close();
+        stopService(motionMonitoring());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         camera.destroy();
+        stopService(motionMonitoring());
     }
 
 }
