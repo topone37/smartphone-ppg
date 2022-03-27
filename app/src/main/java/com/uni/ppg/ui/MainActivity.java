@@ -54,14 +54,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This background service monitors the motion of the phone
-     * The phone needs to be still to do precise measurements
-     */
-    private Intent motionMonitoring() {
-        return new Intent(MainActivity.this, MotionMonitoringService.class);
-    }
-
-    /**
      * Starting heart rate measurement:
      * - flash is turned on
      * - processing consecutive frames starts
@@ -79,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
      * - flash is turned off
      * - processing frames stops
      * - label showing heart rate is cleared
-     * - start monitoring movement of the phone
+     * - stop monitoring movement of the phone
      */
     private void stopMeasurement() {
         camera.setFlash(Flash.OFF);
@@ -98,21 +90,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         camera.open();
-        startService(motionMonitoring());
+        startService(motionMonitoringService());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         camera.close();
-        stopService(motionMonitoring());
+        stopService(motionMonitoringService());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         camera.destroy();
-        stopService(motionMonitoring());
+        stopService(motionMonitoringService());
+    }
+
+    /**
+     * This background service monitors the motion of the phone
+     * The phone needs to be still to do precise measurements
+     */
+    private Intent motionMonitoringService() {
+        return new Intent(MainActivity.this, MotionMonitoringService.class);
     }
 
 }
