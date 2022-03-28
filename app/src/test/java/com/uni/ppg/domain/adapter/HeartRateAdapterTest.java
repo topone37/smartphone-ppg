@@ -1,6 +1,6 @@
 package com.uni.ppg.domain.adapter;
 
-import com.uni.ppg.domain.TestBase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class HeartRateAdapterTest extends TestBase {
+public class HeartRateAdapterTest {
 
     private int[] signal;
     private long[] timeStamps;

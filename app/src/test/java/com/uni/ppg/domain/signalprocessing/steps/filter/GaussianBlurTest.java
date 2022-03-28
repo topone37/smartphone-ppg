@@ -1,15 +1,14 @@
 package com.uni.ppg.domain.signalprocessing.steps.filter;
 
-import com.uni.ppg.domain.TestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
 import com.uni.ppg.domain.signalprocessing.steps.RollingAverage;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class GaussianBlurTest extends TestBase {
+public class GaussianBlurTest {
 
     private int[] rawSignal;
 

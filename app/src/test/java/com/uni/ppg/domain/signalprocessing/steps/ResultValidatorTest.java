@@ -1,15 +1,14 @@
 package com.uni.ppg.domain.signalprocessing.steps;
 
-import com.uni.ppg.domain.TestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uni.ppg.domain.signalprocessing.exception.FrameProcessingException;
 import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class ResultValidatorTest extends TestBase {
+public class ResultValidatorTest {
 
     private int[] maxima;
 

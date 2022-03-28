@@ -1,6 +1,6 @@
 package com.uni.ppg.domain.signalprocessing.steps;
 
-import com.elvishew.xlog.XLog;
+import android.util.Log;
 
 import java.util.Arrays;
 
@@ -11,6 +11,8 @@ import java.util.Arrays;
  * Default window size 10.
  */
 public class RollingAverage implements Step {
+
+    private static final String TAG = RollingAverage.class.getName();
 
     private final int windowSize;
 
@@ -24,7 +26,7 @@ public class RollingAverage implements Step {
 
     @Override
     public int[] invoke(int[] signal) {
-        XLog.i("Running rolling average subtraction");
+        Log.i(TAG, "Running rolling average subtraction");
         return subtractAverage(signal);
     }
 

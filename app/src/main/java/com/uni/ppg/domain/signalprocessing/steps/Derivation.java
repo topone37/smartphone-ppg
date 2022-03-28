@@ -1,6 +1,6 @@
 package com.uni.ppg.domain.signalprocessing.steps;
 
-import com.elvishew.xlog.XLog;
+import android.util.Log;
 
 /**
  * This signal processing step approximates the derivative of the
@@ -8,9 +8,11 @@ import com.elvishew.xlog.XLog;
  */
 public class Derivation implements Step {
 
+    private static final String TAG = Derivation.class.getName();
+
     @Override
     public int[] invoke(int[] signal) {
-        XLog.i("Running differentiation");
+        Log.i(TAG, "Running differentiation");
         return centeredDifference(signal);
     }
 

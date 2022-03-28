@@ -1,6 +1,7 @@
 package com.uni.ppg.domain.signalprocessing.steps.filter;
 
-import com.elvishew.xlog.XLog;
+import android.util.Log;
+
 import com.uni.ppg.domain.signalprocessing.steps.Step;
 
 import uk.me.berndporr.iirj.Butterworth;
@@ -12,6 +13,8 @@ import uk.me.berndporr.iirj.Butterworth;
  */
 public class LowPassFilter implements Step {
 
+    private static final String TAG = LowPassFilter.class.getName();
+
     private final Butterworth butterworth = new Butterworth();
 
     public LowPassFilter(int fps) {
@@ -20,7 +23,7 @@ public class LowPassFilter implements Step {
 
     @Override
     public int[] invoke(int[] signal) {
-        XLog.i("Running low pass filter");
+        Log.i(TAG, "Running low pass filter");
         return filter(signal);
     }
 
