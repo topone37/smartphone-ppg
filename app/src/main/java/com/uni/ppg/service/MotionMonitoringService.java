@@ -11,20 +11,17 @@ import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.elvishew.xlog.LogLevel;
-import com.elvishew.xlog.XLog;
 import com.uni.ppg.R;
 import com.uni.ppg.constant.GlobalConstants;
 
 public class MotionMonitoringService extends Service {
 
-    static {
-        XLog.init(LogLevel.ALL);
-    }
+    private static final String TAG = MotionMonitoringService.class.getName();
 
     private BroadcastReceiver broadcastReceiver;
     private SensorManager sensorManager;
@@ -80,7 +77,7 @@ public class MotionMonitoringService extends Service {
         public void onReceive(Context context, Intent intent) {
             String message = intent.getStringExtra(GlobalConstants.MEASUREMENT_PHASE_CHANGE);
             if (message != null) {
-                XLog.i("Measurement phase changed to: " + message);
+                Log.i(TAG, "Measurement phase changed to: " + message);
                 if (MeasurementPhase.valueOf(message) == MeasurementPhase.START) {
                     listenToSensor();
                 } else {

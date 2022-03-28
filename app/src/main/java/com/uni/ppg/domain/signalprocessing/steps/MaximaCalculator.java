@@ -1,6 +1,6 @@
 package com.uni.ppg.domain.signalprocessing.steps;
 
-import com.elvishew.xlog.XLog;
+import android.util.Log;
 
 import java.util.stream.IntStream;
 
@@ -11,9 +11,11 @@ import java.util.stream.IntStream;
  */
 public class MaximaCalculator implements Step {
 
+    private static final String TAG = MaximaCalculator.class.getName();
+
     @Override
     public int[] invoke(int[] signal) {
-        XLog.i("Running maxima determination");
+        Log.i(TAG, "Running maxima determination");
         return findMaxima(signal);
     }
 

@@ -1,6 +1,7 @@
 package com.uni.ppg.domain.signalprocessing.steps.filter;
 
-import com.elvishew.xlog.XLog;
+import android.util.Log;
+
 import com.uni.ppg.domain.signalprocessing.steps.Step;
 
 /**
@@ -10,13 +11,10 @@ import com.uni.ppg.domain.signalprocessing.steps.Step;
  */
 public class BoxFilter implements Step {
 
+    private static final String TAG = BoxFilter.class.getName();
+
     private final int windowSize;
     private final int padding;
-
-    public BoxFilter(int windowSize) {
-        this.windowSize = windowSize;
-        this.padding = (windowSize - 1) / 2;
-    }
 
     public BoxFilter() {
         this.windowSize = 3;
@@ -25,7 +23,7 @@ public class BoxFilter implements Step {
 
     @Override
     public int[] invoke(int[] signal) {
-        XLog.i("Running box filtering (window size: %d)", windowSize);
+        Log.i(TAG, "Running box filter");
         return filter(signal);
     }
 

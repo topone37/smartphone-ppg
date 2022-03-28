@@ -1,9 +1,12 @@
 package com.uni.ppg.domain.signalprocessing.steps.filter;
 
-import com.elvishew.xlog.XLog;
+import android.util.Log;
+
 import com.uni.ppg.domain.signalprocessing.steps.Step;
 
 public class GaussianBlur implements Step {
+
+    private static final String TAG = GaussianBlur.class.getName();
 
     private final float[] coefficients = new float[]{0.004f, 0.054f, 0.242f, 0.401f, 0.242f, 0.054f, 0.004f};
     private final int padding;
@@ -14,7 +17,7 @@ public class GaussianBlur implements Step {
 
     @Override
     public int[] invoke(int[] signal) {
-        XLog.i("Applying Gaussian blur");
+        Log.i(TAG, "Applying Gaussian blur");
         return filter(signal);
     }
 

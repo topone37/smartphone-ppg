@@ -1,17 +1,13 @@
 package com.uni.ppg.domain.signalprocessing.steps.filter;
 
-import com.elvishew.xlog.LogLevel;
-import com.elvishew.xlog.XLog;
-import com.uni.ppg.domain.TestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class BoxFilterTest extends TestBase {
+public class BoxFilterTest {
 
     private int[] rawSignal;
 

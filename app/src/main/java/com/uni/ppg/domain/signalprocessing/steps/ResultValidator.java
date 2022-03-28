@@ -1,13 +1,16 @@
 package com.uni.ppg.domain.signalprocessing.steps;
 
-import com.elvishew.xlog.XLog;
+import android.util.Log;
+
 import com.uni.ppg.domain.signalprocessing.exception.FrameProcessingException;
 
 public class ResultValidator implements Step {
 
+    private static final String TAG = ResultValidator.class.getName();
+
     @Override
     public int[] invoke(int[] signal) {
-        XLog.i("Running result validation - number of maxima: %d", signal.length);
+        Log.i(TAG, "Running result validation - number of maxima: " + signal.length);
         validate(signal);
         return signal;
     }

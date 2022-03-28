@@ -1,6 +1,7 @@
 package com.uni.ppg.domain.signalprocessing;
 
-import com.uni.ppg.domain.TestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
 import com.uni.ppg.domain.signalprocessing.pipeline.PpgProcessingPipeline;
 
@@ -11,9 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class SignalProcessorChainTest extends TestBase {
+public class SignalProcessorChainTest {
 
     private int[] rawSignal;
 

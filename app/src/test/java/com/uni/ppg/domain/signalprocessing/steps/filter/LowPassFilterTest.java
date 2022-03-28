@@ -1,14 +1,13 @@
 package com.uni.ppg.domain.signalprocessing.steps.filter;
 
-import com.uni.ppg.domain.TestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class LowPassFilterTest extends TestBase {
+public class LowPassFilterTest {
 
     private int[] rawSignal;
 

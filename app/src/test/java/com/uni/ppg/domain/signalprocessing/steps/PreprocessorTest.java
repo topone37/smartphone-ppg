@@ -1,14 +1,13 @@
 package com.uni.ppg.domain.signalprocessing.steps;
 
-import com.uni.ppg.domain.TestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uni.ppg.domain.signalprocessing.pipeline.Pipeline;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class PreprocessorTest extends TestBase {
+public class PreprocessorTest {
 
     private int[] rawSignal;
 
